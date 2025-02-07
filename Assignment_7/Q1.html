@@ -1,1 +1,37 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="guessTheNumber()">Play!</button>
+    <script>
+            let targetNumber = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0;
+            let maxAttempts = 5;
+            function guessTheNumber() {
+                let userGuess = parseInt(prompt("Guess a number between 1 and 100:"));
+                if (isNaN(userGuess)) {
+                    alert("Please enter a valid number.");
+                    return;
+                }
+                if (userGuess === targetNumber) {
+                    alert("Congratulations! You've guessed the correct number!");
+                    return;
+                } else if (userGuess < targetNumber) {
+                    alert("Too low. Try again!");
+                } else {
+                    alert("Too high. Try again!");
+                }
+                if (attempts >= maxAttempts) {
+                    alert(`Sorry, you've used all ${maxAttempts} attempts. The correct number was ${targetNumber}.`);
+                    return;
+                }
+                guessTheNumber();
+            }
+        guessTheNumber();
+      </script>       
+</body>
+</html>
