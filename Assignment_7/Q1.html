@@ -8,28 +8,26 @@
 <body>
     <button onclick="guessTheNumber()">Play!</button>
     <script>
-            let targetNumber = Math.floor(Math.random() * 100) + 1;
-            let attempts = 0;
-            let maxAttempts = 5;
             function guessTheNumber() {
-                let userGuess = parseInt(prompt("Guess a number between 1 and 100:"));
-                if (isNaN(userGuess)) {
-                    alert("Please enter a valid number.");
-                    return;
+                let t = Math.floor(Math.random() * 100) + 1;
+                let max=5;
+                for(let i=0;i<max;i++){
+                    let guess = parseInt(prompt("Guess a number between 1 and 100:"));
+                    if (isNaN(guess)) {
+                        alert("Please enter a valid number.");
+                        return;
+                    }
+                    if (guess === t) {
+                        alert("Congratulations! You've guessed the correct number!");
+                        return;
+                    } else if (guess < t) {
+                        alert("Too low. Try again!");
+                    } else {
+                        alert("Too high. Try again!");
+                    }
                 }
-                if (userGuess === targetNumber) {
-                    alert("Congratulations! You've guessed the correct number!");
-                    return;
-                } else if (userGuess < targetNumber) {
-                    alert("Too low. Try again!");
-                } else {
-                    alert("Too high. Try again!");
-                }
-                if (attempts >= maxAttempts) {
-                    alert(`Sorry, you've used all ${maxAttempts} attempts. The correct number was ${targetNumber}.`);
-                    return;
-                }
-                guessTheNumber();
+                alert(`Sorry, you've used all ${max} attempts. The correct number was ${t}.`);
+                return;
             }
       </script>       
 </body>
