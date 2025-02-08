@@ -8,28 +8,22 @@
 <body>
 
     <h2>Palindrome Checker</h2>
-    <label>Enter a word or sentence:</label>
-    <input type="text" id="inputText" oninput="checkPalindrome()">
+    <label>Enter text:</label>
+    <input type="text" id="txt" oninput="check()">
     
-    <p id="result"></p>
+    <p id="res"></p>
 
     <script>
-        function isPalindrome(str) {
-            let cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, ''); // Remove non-alphanumeric chars
-            let reversedStr = cleanedStr.split('').reverse().join('');
-            return cleanedStr === reversedStr;
+        function isPalin(s) {
+            let clean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
+            return clean === clean.split('').reverse().join('');
         }
 
-        function checkPalindrome() {
-            let text = document.getElementById("inputText").value;
-            let resultElement = document.getElementById("result");
+        function check() {
+            let txt = document.getElementById("txt").value;
+            let res = document.getElementById("res");
 
-            if (text.trim() === "") {
-                resultElement.innerText = "";
-                return;
-            }
-
-            resultElement.innerText = isPalindrome(text) ? "✅ Yes, it's a palindrome!" : "❌ No, it's not a palindrome.";
+            res.innerText = txt.trim() ? (isPalin(txt) ? "✅ Yes, it's a palindrome!" : "❌ No, it's not a palindrome.") : "";
         }
     </script>
 
