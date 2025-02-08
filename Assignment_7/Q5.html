@@ -3,27 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Palindrome Checker</title>
+    <title>Character Counter</title>
 </head>
 <body>
 
-    <h2>Palindrome Checker</h2>
-    <label>Enter text:</label>
-    <input type="text" id="txt" oninput="check()">
+    <h2>Character & Word Counter</h2>
+
+    <textarea id="text" rows="5" cols="50" placeholder="Type here..." oninput="count()"></textarea>
     
-    <p id="res"></p>
+    <p>Characters: <span id="charCount">0</span></p>
+    <p>Words: <span id="wordCount">0</span></p>
+    <p>Repeated Words: <span id="repeatedWords"></span></p>
 
     <script>
-        function isPalin(s) {
-            let clean = s.toLowerCase().replace(/[^a-z0-9]/g, '');
-            return clean === clean.split('').reverse().join('');
+        function count() {
+            let txt = document.getElementById("text").value;
+            let chars = txt.length;
+            let words = txt.trim().split(/\s+/).filter(w => w !== "").length;
+            
+            document.getElementById("charCount").innerText = chars;
+            document.getElementById("wordCount").innerText = words;
+
+            highlightRepeats(txt);
         }
 
-        function check() {
-            let txt = document.getElementById("txt").value;
-            let res = document.getElementById("res");
-
-            res.innerText = txt.trim() ? (isPalin(txt) ? "✅ Yes, it's a palindrome!" : "❌ No, it's not a palindrome.") : "";
+        function highlightRepeats(txt) {
+            let words = txt.toLowerCase().match(/\b\w+\b/g) || [];
+            let freq = {};
+            words.forEach(w => freq[w] = (freq[w] || 0) + 1);
+            
+            let repeated = Object.keys(freq).filter(w => freq[w] > 1);
+            document.getElementById("repeatedWords").innerHTML = repeated.length ? repeated.join(", ") : "None";
         }
     </script>
 
