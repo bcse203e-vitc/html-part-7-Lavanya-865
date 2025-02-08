@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+</head>
+<body>
+
+    <h2>Palindrome Checker</h2>
+    <label>Enter a word or sentence:</label>
+    <input type="text" id="inputText" oninput="checkPalindrome()">
+    
+    <p id="result"></p>
+
+    <script>
+        function isPalindrome(str) {
+            let cleanedStr = str.toLowerCase().replace(/[^a-z0-9]/g, ''); // Remove non-alphanumeric chars
+            let reversedStr = cleanedStr.split('').reverse().join('');
+            return cleanedStr === reversedStr;
+        }
+
+        function checkPalindrome() {
+            let text = document.getElementById("inputText").value;
+            let resultElement = document.getElementById("result");
+
+            if (text.trim() === "") {
+                resultElement.innerText = "";
+                return;
+            }
+
+            resultElement.innerText = isPalindrome(text) ? "✅ Yes, it's a palindrome!" : "❌ No, it's not a palindrome.";
+        }
+    </script>
+
+</body>
+</html>
